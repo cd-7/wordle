@@ -1,0 +1,44 @@
+var currentWordleAnswer = "blast";
+var guess = "hello";
+var guess1 = "";
+var guess2 = "";
+var guess3 = "";
+var guess4 = "";
+var guess5 = "";
+var guess6 = "";
+var guess1Letter1 = "";
+var guess1Letter2 = "";
+var guess1Letter3 = "";
+var guess1Letter4 = "";
+var guess1Letter5 = "";
+var guess2Letter1 = "";
+var guess2Letter2 = "";
+var guess2Letter3 = "";
+var guess2Letter4 = "";
+var guess2Letter5 = "";
+var guess3Letter1 = "";
+var guess3Letter2 = "";
+var guess3Letter3 = "";
+var guess3Letter4 = "";
+var guess3Letter5 = "";
+var guess4Letter1 = "";
+var guess4Letter2 = "";
+var guess4Letter3 = "";
+var guess4Letter4 = "";
+var guess4Letter5 = "";
+var guess5Letter1 = "";
+var guess5Letter2 = "";
+var guess5Letter3 = "";
+var guess5Letter4 = "";
+var guess5Letter5 = "";
+var guess6Letter1 = "";
+var guess6Letter2 = "";
+var guess6Letter3 = "";
+var guess6Letter4 = "";
+var guess6Letter5 = "";
+
+function checkGuess() {
+  guess = document.getElementById("guess__input").value;
+  console.log(guess);
+}
+console.log(currentWordleAnswer);
