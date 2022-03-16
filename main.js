@@ -37,8 +37,31 @@ var guess6Letter3 = "";
 var guess6Letter4 = "";
 var guess6Letter5 = "";
 
-function checkGuess() {
-  guess = document.getElementById("guess__input").value;
-  console.log(guess);
+hideWarning();
+function hideWarning() {
+  document.getElementById("warning__label").style.display =
+    "none";
 }
-console.log(currentWordleAnswer);
+
+function checkGuess() {
+  while (true) {
+    guess = document.getElementById("guess__input").value;
+
+    if (guess.length == 5) {
+      guess1 = guess;
+      break;
+    } else {
+      document.getElementById(
+        "warning__label"
+      ).style.display = "block";
+      setTimeout(hideWarning, 5000);
+      return;
+    }
+  }
+  guess1Letter1 = guess1.charAt(0);
+  document.getElementById("guess1--letter1").innerHTML = guess1Letter1;
+  guess1Letter2 = guess1.charAt(1);
+  guess1Letter3 = guess1.charAt(2);
+  guess1Letter4 = guess1.charAt(3);
+  guess1Letter5 = guess1.charAt(4);
+}
