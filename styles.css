@@ -1,5 +1,8 @@
 html {
   font-size: 62.5%;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -25,15 +28,24 @@ body {
   height: 60px;
   border: white solid 1px;
   margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+  padding-bottom: 2px;
+  text-transform: uppercase;
 }
 
 .guess {
   display: inline-flex;
+  justify-self: center;
 }
 
 .game__input {
   display: inline-flex;
   align-items: center;
+  text-transform: capitalize;
 }
 
 .input__label {
@@ -62,4 +74,13 @@ body {
 
 .game__btn:hover {
   background: rgb(156, 156, 156);
+}
+
+#warning__label {
+  font-size: 3rem;
+  color: yellow;
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 320px;
+  justify-self: center;
 }
