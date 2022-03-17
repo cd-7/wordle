@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wordle</title>
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/normalize.css" />
@@ -58,22 +55,16 @@
       </div>
       <div class="game__input">
         <h1 class="input__label">Enter Word:</h1>
-        <input
-          id="guess__input"
-          type="text"
-          maxlength="5"
-        />
+        <input id="guess__input" type="text" maxlength="5" autofocus />
       </div>
-      <button onclick="checkAllGuesses()" class="game__btn">
-        CHECK
-      </button>
+      <button onclick="checkAllGuesses()" class="game__btn">CHECK</button>
       <h3 id="warning__label">
-        <i class="fas fa-exclamation-triangle"></i> Please
-        enter a real 5 letter word.
+        <i class="fas fa-exclamation-triangle"></i> Please enter a real 5 letter
+        word.
       </h3>
       <div id="end__screen">
         <h2 id="end__heading">You Got It!</h2>
-        <button onclick=“resetGame()” class="end__button">Play Again?</button>
+        <button onclick="resetGame()" class="end__button">Play Again?</button>
       </div>
     </div>
     <script src="main.js"></script>
