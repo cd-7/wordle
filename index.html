@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Wordle</title>
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/normalize.css" />
@@ -11,57 +14,67 @@
   <body>
     <div class="grid">
       <h1 class="game__heading">Wordle</h1>
-      <div class="guess">
+      <div id="guess1">
         <div id="guess1--letter1" class="box"></div>
         <div id="guess1--letter2" class="box"></div>
         <div id="guess1--letter3" class="box"></div>
         <div id="guess1--letter4" class="box"></div>
         <div id="guess1--letter5" class="box"></div>
       </div>
-      <div class="guess">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+      <div id="guess2">
+        <div id="guess2--letter1" class="box"></div>
+        <div id="guess2--letter2" class="box"></div>
+        <div id="guess2--letter3" class="box"></div>
+        <div id="guess2--letter4" class="box"></div>
+        <div id="guess2--letter5" class="box"></div>
       </div>
-      <div class="guess">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+      <div id="guess3">
+        <div id="guess3--letter1" class="box"></div>
+        <div id="guess3--letter2" class="box"></div>
+        <div id="guess3--letter3" class="box"></div>
+        <div id="guess3--letter4" class="box"></div>
+        <div id="guess3--letter5" class="box"></div>
       </div>
-      <div class="guess">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+      <div id="guess4">
+        <div id="guess4--letter1" class="box"></div>
+        <div id="guess4--letter2" class="box"></div>
+        <div id="guess4--letter3" class="box"></div>
+        <div id="guess4--letter4" class="box"></div>
+        <div id="guess4--letter5" class="box"></div>
       </div>
-      <div class="guess">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+      <div id="guess5">
+        <div id="guess5--letter1" class="box"></div>
+        <div id="guess5--letter2" class="box"></div>
+        <div id="guess5--letter3" class="box"></div>
+        <div id="guess5--letter4" class="box"></div>
+        <div id="guess5--letter5" class="box"></div>
       </div>
-      <div class="guess">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+      <div id="guess6">
+        <div id="guess6--letter1" class="box"></div>
+        <div id="guess6--letter2" class="box"></div>
+        <div id="guess6--letter3" class="box"></div>
+        <div id="guess6--letter4" class="box"></div>
+        <div id="guess6--letter5" class="box"></div>
       </div>
       <div class="game__input">
         <h1 class="input__label">Enter Word:</h1>
-        <input id="guess__input" type="text" />
+        <input
+          id="guess__input"
+          type="text"
+          maxlength="5"
+        />
       </div>
-      <button onclick="checkAllGuesses()" class="game__btn">CHECK</button>
+      <button onclick="checkAllGuesses()" class="game__btn">
+        CHECK
+      </button>
       <h3 id="warning__label">
-        <i class="fas fa-exclamation-triangle"></i> Please enter a word with 5
-        letters.
+        <i class="fas fa-exclamation-triangle"></i> Please
+        enter a real 5 letter word.
       </h3>
+      <div id="end__screen">
+        <h2 id="end__heading">You Got It!</h2>
+        <button onclick=“resetGame()” class="end__button">Play Again?</button>
+      </div>
     </div>
     <script src="main.js"></script>
     <script
