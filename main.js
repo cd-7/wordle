@@ -1,4 +1,132 @@
-var currentWordleAnswer = "smash";
+var wordleAnswers = [
+  "which",
+  "there",
+  "their",
+  "about",
+  "would",
+  "these",
+  "other",
+  "words",
+  "could",
+  "write",
+  "first",
+  "water",
+  "after",
+  "where",
+  "right",
+  "think",
+  "three",
+  "years",
+  "place",
+  "sound",
+  "great",
+  "again",
+  "still",
+  "every",
+  "small",
+  "found",
+  "those",
+  "never",
+  "under",
+  "might",
+  "while",
+  "house",
+  "world",
+  "below",
+  "asked",
+  "going",
+  "large",
+  "until",
+  "along",
+  "shall",
+  "being",
+  "often",
+  "earth",
+  "began",
+  "since",
+  "study",
+  "night",
+  "light",
+  "above",
+  "paper",
+  "parts",
+  "young",
+  "story",
+  "point",
+  "times",
+  "heard",
+  "whole",
+  "white",
+  "given",
+  "means",
+  "music",
+  "miles",
+  "thing",
+  "today",
+  "later",
+  "using",
+  "money",
+  "lines",
+  "order",
+  "group",
+  "among",
+  "learn",
+  "known",
+  "space",
+  "table",
+  "early",
+  "trees",
+  "short",
+  "hands",
+  "state",
+  "black",
+  "shown",
+  "stood",
+  "front",
+  "voice",
+  "kinds",
+  "makes",
+  "comes",
+  "close",
+  "power",
+  "lived",
+  "vowel",
+  "taken",
+  "built",
+  "heart",
+  "ready",
+  "quite",
+  "class",
+  "bring",
+  "round",
+  "horse",
+  "shows",
+  "piece",
+  "green",
+  "stand",
+  "birds",
+  "start",
+  "river",
+  "tried",
+  "least",
+  "field",
+  "whose",
+  "girls",
+  "leave",
+  "added",
+  "color",
+  "third",
+  "hours",
+  "moved",
+  "plant",
+  "doing",
+  "names",
+  "forms",
+  "heavy",
+  "ideas",
+];
+
+var currentWordleAnswer = wordleAnswers[Math.floor(Math.random() * 126)];
 var currentWordLetter1 = currentWordleAnswer.charAt(0);
 var currentWordLetter2 = currentWordleAnswer.charAt(1);
 var currentWordLetter3 = currentWordleAnswer.charAt(2);
@@ -43,34 +171,54 @@ var guess6Letter4 = "";
 var guess6Letter5 = "";
 var letters = /^[A-Za-z]+$/;
 
+var game = document.getElementById("game");
+var game__height = game.offsetHeight;
+var html = document.getElementById("html");
+var html__height = html.offsetHeight;
+console.log(html__height - game__height);
 
-hideWarning();
-function hideWarning() {
-  document.getElementById("warning__label").style.display = "none";
+document.getElementById("game__keyboard").style.marginTop =
+  html__height - game__height - 10 + "px";
+
+function focusInput() {
+  document.getElementById("guess__input").focus();
 }
 
-document.getElementById("end__screen").style.display = "none";
-
-function checkAllGuesses() {
+async function checkAllGuesses() {
   while (true) {
     guess = document.getElementById("guess__input").value;
-    if (guess.length == 5 && /^[a-zA-Z]+$/.test(guess) == true) {
+    if (guess == "their") {
       break;
-    } else {
+    }
+    var checkApiURL =
+      "https://api.dictionaryapi.dev/api/v2/entries/en/" + guess;
+    if (guess.length != 5 || /^[a-zA-Z]+$/.test(guess) == false) {
+      apiURL = "https://api.dictionaryapi.dev/api/v2/entries/en/a";
+    }
+    const checkResponse = await fetch(checkApiURL);
+    const checkData = await checkResponse.json();
+
+    if (
+      guess.length != 5 ||
+      /^[a-zA-Z]+$/.test(guess) == false ||
+      checkData.title == "No Definitions Found"
+    ) {
       document.getElementById("warning__label").style.display = "block";
       setTimeout(hideWarning, 5000);
       return;
+    } else {
+      break;
     }
   }
 
-  setTimeout(checkWin, 1000);
+  setTimeout(checkWin, 2000);
   checkGuess6();
   checkGuess5();
   checkGuess4();
   checkGuess3();
   checkGuess2();
   checkGuess1();
-  document.getElementById("guess__input").focus();
+  focusInput();
 }
 
 function checkWin() {
@@ -86,7 +234,6 @@ function checkGuess1() {
   }
   guess1 = guess;
   document.getElementById("guess1").style.transform = "rotateX(360deg)";
-
   guess1Letter1 = guess1.charAt(0);
   document.getElementById("guess1--letter1").innerHTML = guess1Letter1;
   guess1Letter2 = guess1.charAt(1);
@@ -413,10 +560,25 @@ function checkGuess6() {
   } else {
     document.getElementById("guess6--letter5").style.background = "black";
   }
+  document.getElementById("guess__input").disabled = true;
   document.getElementById("guess__input").value = "";
+  if (guess != currentWordleAnswer) {
+    document.getElementById("end__heading").innerHTML =
+      "You Lose. Word was " + currentWordleAnswer + ".";
+    document.getElementById("end__screen").style.display = "grid";
+  }
 }
 
 function resetGame() {
+  document.getElementById("guess__input").disabled = false;
+
+  document.getElementById("guess1").style.transform = "rotateX(0deg)";
+  document.getElementById("guess2").style.transform = "rotateX(0deg)";
+  document.getElementById("guess3").style.transform = "rotateX(0deg)";
+  document.getElementById("guess4").style.transform = "rotateX(0deg)";
+  document.getElementById("guess5").style.transform = "rotateX(0deg)";
+  document.getElementById("guess6").style.transform = "rotateX(0deg)";
+
   guess = "";
   guess1 = "";
   guess2 = "";
@@ -424,17 +586,136 @@ function resetGame() {
   guess4 = "";
   guess5 = "";
   guess6 = "";
+  guess1Letter1 = "";
+  guess1Letter2 = "";
+  guess1Letter3 = "";
+  guess1Letter4 = "";
+  guess1Letter5 = "";
+  guess2Letter1 = "";
+  guess2Letter2 = "";
+  guess2Letter3 = "";
+  guess2Letter4 = "";
+  guess2Letter5 = "";
+  guess3Letter1 = "";
+  guess3Letter2 = "";
+  guess3Letter3 = "";
+  guess3Letter4 = "";
+  guess3Letter5 = "";
+  guess4Letter1 = "";
+  guess4Letter2 = "";
+  guess4Letter3 = "";
+  guess4Letter4 = "";
+  guess4Letter5 = "";
+  guess5Letter1 = "";
+  guess5Letter2 = "";
+  guess5Letter3 = "";
+  guess5Letter4 = "";
+  guess5Letter5 = "";
+  guess6Letter1 = "";
+  guess6Letter2 = "";
+  guess6Letter3 = "";
+  guess6Letter4 = "";
+  guess6Letter5 = "";
+
+  guess1Letter1 = "";
+  document.getElementById("guess1--letter1").innerHTML = "";
+  guess1Letter2 = "";
+  document.getElementById("guess1--letter2").innerHTML = "";
+  guess1Letter3 = "";
+  document.getElementById("guess1--letter3").innerHTML = "";
+  guess1Letter4 = "";
+  document.getElementById("guess1--letter4").innerHTML = "";
+  guess1Letter5 = "";
+  document.getElementById("guess1--letter5").innerHTML = "";
+  guess2Letter1 = "";
+  document.getElementById("guess2--letter1").innerHTML = "";
+  guess2Letter2 = "";
+  document.getElementById("guess2--letter2").innerHTML = "";
+  guess2Letter3 = "";
+  document.getElementById("guess2--letter3").innerHTML = "";
+  guess2Letter4 = "";
+  document.getElementById("guess2--letter4").innerHTML = "";
+  guess2Letter5 = "";
+  document.getElementById("guess2--letter5").innerHTML = "";
+  guess3Letter1 = "";
+  document.getElementById("guess3--letter1").innerHTML = "";
+  guess3Letter2 = "";
+  document.getElementById("guess3--letter2").innerHTML = "";
+  guess3Letter3 = "";
+  document.getElementById("guess3--letter3").innerHTML = "";
+  guess3Letter4 = "";
+  document.getElementById("guess3--letter4").innerHTML = "";
+  guess3Letter5 = "";
+  document.getElementById("guess3--letter5").innerHTML = "";
+  guess4Letter1 = "";
+  document.getElementById("guess4--letter1").innerHTML = "";
+  guess4Letter2 = "";
+  document.getElementById("guess4--letter2").innerHTML = "";
+  guess4Letter3 = "";
+  document.getElementById("guess4--letter3").innerHTML = "";
+  guess4Letter4 = "";
+  document.getElementById("guess4--letter4").innerHTML = "";
+  guess4Letter5 = "";
+  document.getElementById("guess4--letter5").innerHTML = "";
+  guess5Letter1 = "";
+  document.getElementById("guess5--letter1").innerHTML = "";
+  guess5Letter2 = "";
+  document.getElementById("guess5--letter2").innerHTML = "";
+  guess5Letter3 = "";
+  document.getElementById("guess5--letter3").innerHTML = "";
+  guess5Letter4 = "";
+  document.getElementById("guess5--letter4").innerHTML = "";
+  guess5Letter5 = "";
+  document.getElementById("guess5--letter5").innerHTML = "";
+  guess6Letter1 = "";
+  document.getElementById("guess6--letter1").innerHTML = "";
+  guess6Letter2 = "";
+  document.getElementById("guess6--letter2").innerHTML = "";
+  guess6Letter3 = "";
+  document.getElementById("guess6--letter3").innerHTML = "";
+  guess6Letter4 = "";
+  document.getElementById("guess6--letter4").innerHTML = "";
+  guess6Letter5 = "";
+  document.getElementById("guess6--letter5").innerHTML = "";
+
+  document.getElementById("guess1--letter1").style.background = "none";
+  document.getElementById("guess1--letter2").style.background = "none";
+  document.getElementById("guess1--letter3").style.background = "none";
+  document.getElementById("guess1--letter4").style.background = "none";
+  document.getElementById("guess1--letter5").style.background = "none";
+  document.getElementById("guess2--letter1").style.background = "none";
+  document.getElementById("guess2--letter2").style.background = "none";
+  document.getElementById("guess2--letter3").style.background = "none";
+  document.getElementById("guess2--letter4").style.background = "none";
+  document.getElementById("guess2--letter5").style.background = "none";
+  document.getElementById("guess3--letter1").style.background = "none";
+  document.getElementById("guess3--letter2").style.background = "none";
+  document.getElementById("guess3--letter3").style.background = "none";
+  document.getElementById("guess3--letter4").style.background = "none";
+  document.getElementById("guess3--letter5").style.background = "none";
+  document.getElementById("guess4--letter1").style.background = "none";
+  document.getElementById("guess4--letter2").style.background = "none";
+  document.getElementById("guess4--letter3").style.background = "none";
+  document.getElementById("guess4--letter4").style.background = "none";
+  document.getElementById("guess4--letter5").style.background = "none";
+  document.getElementById("guess5--letter1").style.background = "none";
+  document.getElementById("guess5--letter2").style.background = "none";
+  document.getElementById("guess5--letter3").style.background = "none";
+  document.getElementById("guess5--letter4").style.background = "none";
+  document.getElementById("guess5--letter5").style.background = "none";
+  document.getElementById("guess6--letter1").style.background = "none";
+  document.getElementById("guess6--letter2").style.background = "none";
+  document.getElementById("guess6--letter3").style.background = "none";
+  document.getElementById("guess6--letter4").style.background = "none";
+  document.getElementById("guess6--letter5").style.background = "none";
+
   document.getElementById("end__screen").style.display = "none";
+  setTimeout(focusInput, 1000);
+
+  currentWordleAnswer = wordleAnswers[Math.floor(Math.random() * 126)];
+  currentWordLetter1 = currentWordleAnswer.charAt(0);
+  currentWordLetter2 = currentWordleAnswer.charAt(1);
+  currentWordLetter3 = currentWordleAnswer.charAt(2);
+  currentWordLetter4 = currentWordleAnswer.charAt(3);
+  currentWordLetter5 = currentWordleAnswer.charAt(4);
 }
-
-fetch("https://api.dictionaryapi.dev/api/v2/entries/en/hello", {
-  method: "GET",
-})
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
-//https://english.api.rakuten.net/dpventures/api/wordsapi?endpoint=54b6af68e4b02f9493f90b22
