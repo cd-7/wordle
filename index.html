@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wordle</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="wordle_styles.css" />
     <link rel="stylesheet" href="css/normalize.css" />
   </head>
   <body>
-    <div class="grid">
-      <h1 class="game__heading">Wordle</h1>
+    <div id="game" class="grid">
+      <div class="game__header">
+        <h1 class="game__heading">Durdle</h1>
+        <h2 class="game__creator">By: Chase Durnin</h2>
+      </div>
       <div id="guess1">
         <div id="guess1--letter1" class="box"></div>
         <div id="guess1--letter2" class="box"></div>
@@ -53,21 +56,44 @@
         <div id="guess6--letter4" class="box"></div>
         <div id="guess6--letter5" class="box"></div>
       </div>
-      <div class="game__input">
-        <h1 class="input__label">Enter Word:</h1>
-        <input id="guess__input" type="text" maxlength="5" autofocus />
-      </div>
-      <button onclick="checkAllGuesses()" class="game__btn">CHECK</button>
-      <h3 id="warning__label">
-        <i class="fas fa-exclamation-triangle"></i> Please enter a real 5 letter
-        word.
-      </h3>
-      <div id="end__screen">
-        <h2 id="end__heading">You Got It!</h2>
-        <button onclick="resetGame()" class="end__button">Play Again?</button>
+      <div id="game__keyboard" class="grid">
+        <div class="keyboard--line1">
+          <button id="q--key" class="key">Q</button>
+          <button id="q--key" class="key">W</button>
+          <button id="q--key" class="key">E</button>
+          <button id="q--key" class="key">R</button>
+          <button id="q--key" class="key">T</button>
+          <button id="q--key" class="key">Y</button>
+          <button id="q--key" class="key">U</button>
+          <button id="q--key" class="key">I</button>
+          <button id="q--key" class="key">O</button>
+          <button id="q--key" class="key">P</button>
+        </div>
+        <div class="keyboard--line2">
+          <button id="q--key" class="key">A</button>
+          <button id="q--key" class="key">S</button>
+          <button id="q--key" class="key">D</button>
+          <button id="q--key" class="key">F</button>
+          <button id="q--key" class="key">G</button>
+          <button id="q--key" class="key">H</button>
+          <button id="q--key" class="key">J</button>
+          <button id="q--key" class="key">K</button>
+          <button id="q--key" class="key">L</button>
+        </div>
+        <div class="keyboard--line3">
+          <button id="q--key" class="key">ENTER</button>
+          <button id="q--key" class="key">Z</button>
+          <button id="q--key" class="key">X</button>
+          <button id="q--key" class="key">C</button>
+          <button id="q--key" class="key">V</button>
+          <button id="q--key" class="key">B</button>
+          <button id="q--key" class="key">N</button>
+          <button id="q--key" class="key">M</button>
+          <button id="q--key" class="key">DELETE</button>
+        </div>
       </div>
     </div>
-    <script src="main.js"></script>
+    <script src="wordle_main.js"></script>
     <script
       src="https://kit.fontawesome.com/f29c0974db.js"
       crossorigin="anonymous"
