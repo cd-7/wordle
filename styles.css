@@ -14,10 +14,19 @@ body {
 }
 
 .game__heading {
-  margin: 2px 0 20px 0;
+  margin: 0;
   font-size: 7rem;
   color: white;
+}
+
+.game__header {
+  color: white;
   justify-self: center;
+  text-align: center;
+}
+
+.game__creator {
+  margin: 0 0 20px 0;
 }
 
 .grid {
@@ -29,7 +38,7 @@ body {
   width: 50px;
   height: 50px;
   border: white solid 1px;
-  margin: 5px;
+  margin: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,13 +109,6 @@ body {
   justify-self: center;
 }
 
-@media screen and (min-width: 1200px) {
-  .box {
-    width: 60px;
-    height: 60px;
-  }
-}
-
 #end__screen {
   transform: translateY(-500px);
   width: 600px;
@@ -118,11 +120,12 @@ body {
 }
 
 #end__heading {
-  font-size: 6rem;
+  font-size: 5rem;
   justify-self: center;
   align-self: center;
   color: white;
-  margin: 0;
+  margin: 10px;
+  text-align: center;
 }
 
 .end__button {
@@ -141,4 +144,17 @@ body {
 
 .end__button:hover {
   background: rgb(156, 156, 156);
+}
+
+/* KEYBOARD */
+
+.keyboard--line1,
+.keyboard--line2,
+.keyboard--line3 {
+  justify-self: center;
+  margin: 5px 0;
+}
+
+#game__keyboard {
+  padding-bottom: 40px;
 }
